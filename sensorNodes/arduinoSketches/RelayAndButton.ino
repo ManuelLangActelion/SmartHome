@@ -22,7 +22,7 @@
  * Version 1.0 - Henrik Ekblad
  *
  * DESCRIPTION
- * Example sketch for a "light switch" where you can control light or something
+ * Example sketch for a "relay switch" where you can control binary or something
  * else from both HA controller and a local physical button
  * (connected between digital pin 3 and GND).
  * This node also works as a repeader for other nodes
@@ -55,7 +55,7 @@ int oldValue=0;
 
 static unsigned long last_interrupt_time = 0;
 static bool initialized = false;
-MyMessage msg(CHILD_ID,V_LIGHT);
+MyMessage msg(CHILD_ID,V_STATUS);
 
 void setup()
 {
@@ -84,7 +84,7 @@ void presentation()  {
   sendSketchInfo("Relay & Button", "1.0");
 
   // Register all sensors to gw (they will be created as child devices)
-  present(CHILD_ID, S_LIGHT);
+  present(CHILD_ID, S_BINARY);
 }
 
 void processButton() {
@@ -144,7 +144,7 @@ void receive(const MyMessage &message) {
   if (message.isAck()) {
      Serial.println("This is an ack from gateway");
   } else {
-    if (message.type == 23) {
+    if (message.type == V_STATUS) {
        // Change relay state
        setState(message.getBool());
 

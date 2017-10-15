@@ -63,5 +63,5 @@ class MySensorsMqttClient():
             rc = client.loop()
         print("rc: " + str(rc))
 
-client = MySensorsMqttClient(url='127.0.0.1', port=1883, username='homeassistant', password='Actel10n!')
+client = MySensorsMqttClient(url='127.0.0.1', port=1883, username='homeassistant', password='****')
 client.listen()

@@ -57,7 +57,7 @@ mqtt:
   port: 1883
   client_id: ha
   username: homeassistant
-  password: Actel10n!
+  password: ****
   discovery: true
   discovery_prefix: homeassistant
 
@@ -73,20 +73,31 @@ sensor:
     name: 'Room Humidity'
     state_topic: 'room/humidity'
   - platform: mqtt
-    state_topic: 'office/sensor1'
+    state_topic: 'mysensors-out/122/1/1/0/0'
     name: 'Temperature'
     unit_of_measurment: 'C'
-    value_template: '{{value_json.temp}}'
   - platform: mqtt
-    state_topic: 'office/sensor1'
+    state_topic: 'mysensors-out/122/0/1/0/1'
     name: 'Humidity'
     unit_of_measurment: '%'
-    value_template: '{{value_json.hum}}'
+
+binary_sensor:
+  - platform: mqtt
+    state_topic: "mysensors-out/99/1/1/0/2"
+    payload_on: 1
+    payload_off: 0
+
+switch:
+  - platform: mqtt
+    command_topic: "mysensors-in/99/1/1/1/2"
+    payload_on: 1
+    payload_off: 0
+
 mysensors:
   gateways:
     - device: mqtt
-      topic_in_prefix: 'mysensors-in'
-      topic_out_prefix: 'mysensors-out'
+      topic_in_prefix: 'mysensors-out'
+      topic_out_prefix: 'mysensors-in'
   version: 2.0
 
 # Text to speech
