@@ -75,7 +75,7 @@ sensor:
   - platform: mqtt
     state_topic: 'mysensors-out/122/1/1/0/0'
     name: 'Temperature'
-    unit_of_measurment: 'C'
+    unit_of_measurment: '°C'
   - platform: mqtt
     state_topic: 'mysensors-out/122/0/1/0/1'
     name: 'Humidity'
